@@ -166,6 +166,18 @@
 
   a { color: var(--accent); }
 
+  .delete-btn {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 10px 18px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
   table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 0.9rem; }
   table, th, td { border: 1px solid var(--border); }
   th, td { padding: 8px 10px; text-align: left; vertical-align: top; }
@@ -178,7 +190,7 @@
 <header class="top">
   <div class="top-inner">
     <div class="brand">CYCL<span>I</span>QUE</div>
-    <div class="updated">Dernière mise à jour : 25 octobre 2026</div>
+    <div class="updated">Dernière mise à jour : 26 octobre 2026</div>
   </div>
 </header>
 
@@ -347,7 +359,13 @@
     <section id="s10">
       <h2><span class="num">10</span> Suppression du compte et des données</h2>
       <p>Depuis votre profil dans l'application, vous pouvez à tout moment <strong>désactiver votre compte</strong> : vous ne pourrez alors plus vous reconnecter. Cette désactivation est immédiate, mais n'efface pas automatiquement vos données.</p>
-      <p>Pour demander l'<strong>effacement définitif</strong> de votre compte et de vos données personnelles, écrivez-nous à <strong>application.cyclique@gmail.com</strong> en précisant l'adresse e-mail associée à votre compte. Votre demande sera traitée dans un délai raisonnable, et au plus tard dans le délai prévu par le RGPD.</p>
+      <p>Pour demander l'<strong>effacement définitif</strong> de votre compte et de vos données personnelles, cliquez sur le bouton ci-dessous (ou écrivez directement à application.cyclique@gmail.com) en précisant l'adresse e-mail associée à votre compte. Votre demande sera traitée dans un délai raisonnable, et au plus tard dans le délai prévu par le RGPD.</p>
+      <p>
+        <a class="delete-btn"
+           href="mailto:application.cyclique@gmail.com?subject=Suppression%20de%20mon%20compte%20CYCLIQUE&body=Bonjour%2C%0A%0AJe%20souhaite%20demander%20la%20suppression%20d%C3%A9finitive%20de%20mon%20compte%20CYCLIQUE%20et%20de%20toutes%20les%20donn%C3%A9es%20associ%C3%A9es.%0A%0AAdresse%20e-mail%20du%20compte%20%3A%20">
+          Demander la suppression de mon compte et de mes données
+        </a>
+      </p>
       <p>La suppression de votre compte n'annule pas automatiquement un abonnement en cours : si vous avez un abonnement actif, pensez à le résilier séparément (ou demandez-le dans le même message) afin qu'aucun nouveau prélèvement n'ait lieu.</p>
     </section>
 
