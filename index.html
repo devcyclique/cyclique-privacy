@@ -1,0 +1,377 @@
+<meta charset="UTF-8">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Politique de confidentialité CYCLIQUE</title>
+<style>
+  /* Layout: fixed left table-of-contents rail on wide screens, single
+     column with a collapsible TOC on phone width. Palette drawn from the
+     CYCLIQUE app itself (cream background, sage green, terracotta accent,
+     warm brown text) rather than a generic legal-document grey. */
+  :root {
+    --bg: #F6F1E7;
+    --surface: #FFFFFF;
+    --surface-muted: #EFE7D8;
+    --fg: #3B3128;
+    --fg-muted: #7C6E60;
+    --border: #E2D7C3;
+    --accent: #C97B5B;
+    --accent-soft: #C97B5B22;
+    --primary: #6B7A63;
+    --primary-soft: #6B7A6322;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #231E19;
+      --surface: #2C2620;
+      --surface-muted: #332C24;
+      --fg: #EFE7DA;
+      --fg-muted: #B6A991;
+      --border: #463C32;
+      --accent: #E09974;
+      --accent-soft: #E0997433;
+      --primary: #93A489;
+      --primary-soft: #93A48933;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #231E19;
+    --surface: #2C2620;
+    --surface-muted: #332C24;
+    --fg: #EFE7DA;
+    --fg-muted: #B6A991;
+    --border: #463C32;
+    --accent: #E09974;
+    --accent-soft: #E0997433;
+    --primary: #93A489;
+    --primary-soft: #93A48933;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    line-height: 1.65;
+    padding-block: 0;
+  }
+  body, .shell { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+  h1, h2, h3, .brand { font-family: 'Fraunces', Georgia, serif; }
+
+  header.top {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+    z-index: 10; background: var(--bg);
+  }
+  .top-inner {
+    max-width: 920px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .brand { font-size: 1.25rem; font-weight: 600; color: var(--primary); letter-spacing: 0.02em; }
+  .brand span { color: var(--accent); }
+  .updated { font-size: 0.8rem; color: var(--fg-muted); white-space: nowrap; }
+
+  .shell {
+    max-width: 920px; margin: 0 auto;
+    display: grid; grid-template-columns: 220px 1fr; gap: 40px;
+    padding-top: 32px; padding-bottom: 64px;
+    align-items: start;
+  }
+  @media (max-width: 760px) {
+    .shell { grid-template-columns: 1fr; }
+    nav.toc { position: static; order: 2; }
+    main { order: 1; }
+  }
+
+  nav.toc {
+    position: sticky; top: calc(env(safe-area-inset-top, 0px) + 80px);
+    font-size: 0.85rem;
+  }
+  nav.toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  nav.toc a {
+    color: var(--fg-muted); text-decoration: none; display: block;
+    padding: 4px 0 4px 10px; border-left: 2px solid transparent;
+  }
+  nav.toc a:hover { color: var(--primary); border-left-color: var(--primary-soft); }
+
+  main { min-width: 0; }
+
+  .intro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+  }
+  .intro p { margin: 0 0 10px; color: var(--fg-muted); font-size: 0.95rem; }
+  .intro p:last-child { margin-bottom: 0; }
+  .intro strong { color: var(--fg); }
+
+  section { margin-bottom: 40px; scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 90px); }
+  h2 {
+    font-size: 1.3rem; font-weight: 600; color: var(--fg);
+    display: flex; align-items: baseline; gap: 10px;
+    margin: 0 0 14px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  h2 .num { color: var(--accent); font-variant-numeric: tabular-nums; font-size: 1rem; }
+  h3 {
+    font-size: 1.02rem; font-weight: 600; color: var(--primary);
+    margin: 22px 0 8px;
+  }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 14px; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  strong { color: var(--fg); }
+
+  .callout {
+    background: var(--primary-soft);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    color: var(--fg);
+    margin: 14px 0;
+  }
+  .fact {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    margin: 14px 0;
+  }
+  .fact .label { font-weight: 600; color: var(--accent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.06em; display: block; margin-bottom: 4px; }
+
+  address { font-style: normal; color: var(--fg-muted); font-size: 0.92rem; line-height: 1.6; }
+  address strong { display: block; color: var(--fg); margin-bottom: 2px; }
+
+  footer {
+    max-width: 920px; margin: 0 auto;
+    padding: 24px 0 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    color: var(--fg-muted); font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+  }
+
+  a { color: var(--accent); }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; font-size: 0.9rem; }
+  table, th, td { border: 1px solid var(--border); }
+  th, td { padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); font-weight: 600; }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">CYCL<span>I</span>QUE</div>
+    <div class="updated">Dernière mise à jour : 25 octobre 2026</div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="Sommaire">
+    <ol>
+      <li><a href="#s1">1. Qui sommes-nous</a></li>
+      <li><a href="#s2">2. Données traitées</a></li>
+      <li><a href="#s3">3. Pourquoi</a></li>
+      <li><a href="#s4">4. Bases juridiques</a></li>
+      <li><a href="#s5">5. Prestataires</a></li>
+      <li><a href="#s6">6. Hébergement</a></li>
+      <li><a href="#s7">7. Conservation</a></li>
+      <li><a href="#s8">8. Sécurité</a></li>
+      <li><a href="#s9">9. Vos droits</a></li>
+      <li><a href="#s10">10. Suppression du compte</a></li>
+      <li><a href="#s11">11. Mineurs</a></li>
+      <li><a href="#s12">12. Modifications</a></li>
+      <li><a href="#s13">13. Contact</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <p><strong>Politique de confidentialité — CYCLIQUE</strong></p>
+      <p>CYCLIQUE est une application de fitness dédiée à l'adaptation du corps féminin à ses différentes étapes de vie, avec un premier programme consacré à la reconstruction physique et au bien-être pendant le post-partum. Cette page explique quelles données personnelles sont traitées lorsque vous utilisez CYCLIQUE, pourquoi, pendant combien de temps, et comment exercer vos droits.</p>
+    </div>
+
+    <section id="s1">
+      <h2><span class="num">1</span> Qui sommes-nous ?</h2>
+      <p>Le responsable du traitement des données personnelles de l'application CYCLIQUE est la personne physique qui l'édite et l'exploite :</p>
+      <address>
+        <strong>Mélissa Ladwein</strong>
+        Rua Tacões 63 A, 8970-309 Pereiro ACT, Distrito de Faro, Portugal<br>
+        Contact relatif à la confidentialité : application.cyclique@gmail.com
+      </address>
+      <p>Dans la présente politique, « CYCLIQUE », « nous » et « notre application » désignent ce responsable du traitement.</p>
+    </section>
+
+    <section id="s2">
+      <h2><span class="num">2</span> Les données personnelles traitées</h2>
+      <p>Les données traitées dépendent des fonctionnalités que vous utilisez et des informations que vous choisissez de communiquer.</p>
+
+      <h3>2.1 Données de compte et de connexion</h3>
+      <ul>
+        <li>adresse électronique ;</li>
+        <li>nom affiché, s'il est renseigné ;</li>
+        <li>identifiant unique du compte et photo de profil ;</li>
+        <li>mot de passe, si vous créez un compte par e-mail — haché par le fournisseur d'authentification, jamais lisible ni conservé en clair par CYCLIQUE ;</li>
+        <li>statut du compte (actif ou désactivé) et rôle (utilisatrice, professionnel·le de santé, partenaire, administration).</li>
+      </ul>
+      <p>CYCLIQUE propose deux méthodes de connexion : par e-mail et mot de passe, ou via « Se connecter avec Google ». Dans les deux cas, l'authentification repose sur Firebase Authentication (Google), qui traite les informations nécessaires à la création et à la sécurisation de votre compte pour notre compte, conformément à ses propres conditions.</p>
+
+      <h3>2.2 Données d'achat et d'abonnement</h3>
+      <p>L'accès complet à l'application (programmes d'entraînement, Communauté, Messagerie) repose sur un abonnement payant, en paiement unique ou mensuel. Les paiements sont traités par <strong>Stripe</strong>, notre prestataire de paiement. CYCLIQUE conserve la formule choisie, le prix, les dates de début, de renouvellement et d'expiration, ainsi qu'un identifiant Stripe permettant de retrouver la transaction.</p>
+      <div class="fact">
+        <span class="label">En pratique</span>
+        CYCLIQUE ne reçoit et ne conserve jamais votre numéro de carte bancaire complet : la saisie et le traitement des données de paiement ont lieu directement chez Stripe.
+      </div>
+      <p>Certains contenus vendus à l'unité (par exemple des guides) peuvent suivre le même principe lorsqu'ils sont proposés à l'achat.</p>
+
+      <h3>2.3 Données d'utilisation de l'application</h3>
+      <ul>
+        <li>progression dans les programmes (séances terminées, séries, répétitions ou poids que vous enregistrez) ;</li>
+        <li>publications, commentaires et réactions que vous partagez dans la Communauté ;</li>
+        <li>messages échangés avec l'équipe CYCLIQUE et, le cas échéant, avec un·e professionnel·le de santé ou un·e partenaire référencé·e dans l'application ;</li>
+        <li>signalements que vous effectuez sur un contenu ou un compte ;</li>
+        <li>préférences (notifications de la Communauté, son des vidéos) ;</li>
+        <li>informations techniques nécessaires à la résolution d'erreurs (voir 2.5).</li>
+      </ul>
+
+      <h3>2.4 Données relatives au corps et au post-partum</h3>
+      <p>CYCLIQUE vous permet de renseigner, de façon <strong>entièrement facultative</strong>, des informations sur votre parcours corporel dans votre profil : situation (enceinte ou jeune maman), nombre d'enfants, date de naissance, poids, taille, préférences alimentaires, localisation approximative, ainsi que des informations liées à l'accouchement (mode d'accouchement, recours à une péridurale, lieu de l'accouchement, accouchement assisté, récit libre de votre expérience, symptômes persistant depuis la grossesse ou l'accouchement).</p>
+      <p>Ces informations peuvent constituer des <strong>données concernant la santé</strong> au sens de l'article 9 du Règlement général sur la protection des données (RGPD). Aucun champ n'est obligatoire : chacun reste vide tant que vous ne choisissez pas de le renseigner, et vous pouvez le modifier ou l'effacer à tout moment.</p>
+      <div class="callout">
+        Par défaut, ces informations ne sont visibles que par vous-même et par l'équipe CYCLIQUE (support et modération). Elles ne sont jamais consultées par les professionnel·le·s de santé ou partenaires référencés dans l'application, ni utilisées à des fins publicitaires.
+      </div>
+      <p>CYCLIQUE propose un écran <strong>« Confidentialité »</strong> distinct, accessible depuis votre profil, qui vous permet de choisir, champ par champ, lesquelles de ces informations vous acceptez de rendre visibles par les autres membres de la Communauté — notamment pour vous permettre de vous retrouver par points communs (par exemple le même mode d'accouchement ou le même nombre d'enfants) dans l'annuaire « Membres ». Chaque case est désactivée par défaut ; votre choix peut être modifié ou retiré à tout moment, et un champ retiré cesse immédiatement d'être visible par les autres membres.</p>
+
+      <h3>2.5 Données techniques</h3>
+      <p>CYCLIQUE utilise <strong>Firebase Crashlytics</strong> pour diagnostiquer les erreurs techniques (plantages de l'application, modèle d'appareil, version du système d'exploitation et de l'application) — actif uniquement sur les versions publiées de l'application, jamais pendant son développement. Le socle technique <strong>Google Analytics pour Firebase</strong> est également présent et peut recueillir automatiquement des événements d'usage basiques (ouverture de l'application, session). Ces outils ne sont pas utilisés à ce jour à des fins publicitaires et ne sont pas combinés avec un identifiant publicitaire.</p>
+      <p>Selon les fonctionnalités que vous utilisez, CYCLIQUE demande l'accès à l'appareil photo et à votre bibliothèque de photos/vidéos (photo de profil, publications, suivi de séances) et à votre microphone (messages vocaux dans la Communauté et la messagerie) — uniquement lorsque vous déclenchez vous-même ces fonctionnalités.</p>
+      <p>Un module technique (SDK Facebook) est présent pour permettre, si vous le choisissez explicitement, de partager un contenu en story Instagram ou Facebook. Il ne s'active que sur cette action volontaire ; il n'est pas utilisé pour vous suivre ni pour afficher de la publicité dans l'application.</p>
+
+      <h3>Publicité et mesure de campagnes</h3>
+      <p>CYCLIQUE peut faire la promotion de l'application au moyen de campagnes publicitaires sur Facebook et Instagram (Meta) ou sur d'autres plateformes. <strong>À ce jour, aucun outil de suivi, de mesure de conversion ou d'attribution publicitaire n'est intégré à l'application</strong> : voir une publicité CYCLIQUE sur Facebook ou Instagram n'implique donc pas que CYCLIQUE transmette des données sur ses utilisatrices à Meta. Si un tel outil venait à être intégré, cette politique serait mise à jour avant son activation. Dans tous les cas, les données relatives au corps ou à la santé (voir 2.4) ne seront jamais transmises à des fins publicitaires.</p>
+    </section>
+
+    <section id="s3">
+      <h2><span class="num">3</span> Pourquoi utilisons-nous ces données ?</h2>
+      <ul>
+        <li>créer, authentifier et administrer votre compte ;</li>
+        <li>fournir les programmes et fonctionnalités que vous utilisez, et enregistrer votre progression ;</li>
+        <li>gérer les achats, l'abonnement, les paiements et les remboursements ;</li>
+        <li>faire fonctionner la Communauté et la Messagerie, et modérer les contenus signalés ;</li>
+        <li>répondre à vos demandes adressées au support ;</li>
+        <li>diagnostiquer les erreurs techniques et assurer le bon fonctionnement de l'application ;</li>
+        <li>mesurer l'usage de l'application pour l'améliorer ;</li>
+        <li>respecter nos obligations légales et défendre nos droits en cas de litige.</li>
+      </ul>
+      <p>Les données relatives au corps ou à la santé (voir 2.4) ne sont utilisées que pour les fonctionnalités de suivi personnel et, lorsque vous le choisissez explicitement, pour l'annuaire des membres de la Communauté. Elles ne sont jamais utilisées à des fins publicitaires.</p>
+    </section>
+
+    <section id="s4">
+      <h2><span class="num">4</span> Bases juridiques des traitements</h2>
+      <p>Selon la finalité poursuivie, nos traitements reposent sur :</p>
+      <ul>
+        <li>l'<strong>exécution du contrat</strong> conclu avec vous (création du compte, fourniture des programmes, gestion de l'abonnement) ;</li>
+        <li>le respect d'une <strong>obligation légale</strong> (comptabilité, lutte contre la fraude) ;</li>
+        <li>notre <strong>intérêt légitime</strong> (sécurité du service, diagnostic des erreurs, amélioration de l'application) ;</li>
+        <li>votre <strong>consentement</strong>, lorsqu'il est requis — notamment pour renseigner des données relatives à votre corps ou à votre santé (voir 2.4), et séparément pour choisir de les rendre visibles par d'autres membres de la Communauté.</li>
+      </ul>
+      <p>Le simple fait de créer un compte ou d'accepter cette politique ne vaut jamais, à lui seul, consentement au traitement de données de santé : ce consentement résulte de votre démarche volontaire de renseigner un champ facultatif, et peut être retiré à tout moment en l'effaçant depuis votre profil.</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="num">5</span> Prestataires et destinataires des données</h2>
+      <table>
+        <tr><th>Prestataire</th><th>Rôle</th></tr>
+        <tr><td>Firebase / Google</td><td>Authentification, base de données, stockage des fichiers (photos, vidéos, messages vocaux), diagnostic des erreurs (Crashlytics), statistiques d'usage basiques (Analytics).</td></tr>
+        <tr><td>Stripe</td><td>Traitement des paiements et de l'abonnement.</td></tr>
+        <tr><td>Meta (Facebook/Instagram)</td><td>Reçoit uniquement le contenu que vous choisissez explicitement de partager en story — aucune transmission automatique.</td></tr>
+      </table>
+      <p>En interne, les données sont accessibles à l'équipe CYCLIQUE — à ce jour une seule personne, la responsable du traitement elle-même, qui assure aussi le support et la modération. Les données peuvent également être communiquées à des autorités compétentes lorsque la loi l'exige.</p>
+    </section>
+
+    <section id="s6">
+      <h2><span class="num">6</span> Hébergement et transferts internationaux</h2>
+      <p>CYCLIQUE repose sur l'infrastructure Firebase/Google Cloud. Les fonctions serveur qui traitent les paiements et l'abonnement (création des sessions de paiement Stripe, gestion des annulations) s'exécutent dans la région <strong>us-central1 (États-Unis)</strong> de Google Cloud. La base de données et le stockage de fichiers sont hébergés sur l'infrastructure Google Cloud ; leur région précise fait l'objet d'une vérification régulière dans la console Firebase.</p>
+      <p>Lorsque des données sont ainsi traitées ou transférées en dehors de l'Espace économique européen (notamment vers les États-Unis, via Google ou Stripe), nous nous appuyons sur les garanties prévues par ces prestataires (clauses contractuelles types ou mécanisme équivalent reconnu par le RGPD).</p>
+    </section>
+
+    <section id="s7">
+      <h2><span class="num">7</span> Durée de conservation</h2>
+      <ul>
+        <li><strong>Données de compte</strong> : pendant toute la durée d'utilisation de votre compte ;</li>
+        <li><strong>Données de commande et de facturation</strong> : pendant les durées légales de conservation applicables en matière comptable et fiscale ;</li>
+        <li><strong>Données de progression, de corps et de santé</strong> : tant que votre compte existe, ou jusqu'à ce que vous les effaciez vous-même depuis votre profil ;</li>
+        <li><strong>Données techniques de diagnostic</strong> : selon la durée de rétention par défaut de Firebase Crashlytics/Analytics.</li>
+      </ul>
+      <p>La désactivation de votre compte (voir section 10) ne supprime pas immédiatement vos données : elle arrête seulement votre accès. L'effacement définitif intervient sur demande, comme expliqué ci-dessous.</p>
+    </section>
+
+    <section id="s8">
+      <h2><span class="num">8</span> Sécurité</h2>
+      <p>L'accès aux données est contrôlé par des règles de sécurité appliquées côté serveur (Firestore Security Rules) : chaque compte ne peut lire ou modifier que les données auxquelles son rôle lui donne droit, et les données sensibles (informations de profil, messages privés) ne sont jamais accessibles à une autre utilisatrice sans action explicite de votre part. Les mots de passe sont gérés par Firebase Authentication et ne sont jamais stockés en clair.</p>
+      <p>En cas de violation de données personnelles présentant un risque pour vos droits, nous appliquerons les mesures de notification prévues par la réglementation applicable.</p>
+    </section>
+
+    <section id="s9">
+      <h2><span class="num">9</span> Vos droits</h2>
+      <p>Conformément au RGPD, vous pouvez demander :</p>
+      <ul>
+        <li>l'accès à vos données ;</li>
+        <li>la rectification des données inexactes ;</li>
+        <li>l'effacement de vos données ;</li>
+        <li>la limitation de certains traitements ;</li>
+        <li>la portabilité de certaines données ;</li>
+        <li>l'opposition à certains traitements ;</li>
+        <li>le retrait de votre consentement, lorsque le traitement repose sur celui-ci — sans effet sur la licéité des traitements déjà effectués.</li>
+      </ul>
+      <p>Pour exercer ces droits, contactez-nous à <strong>application.cyclique@gmail.com</strong>. Une vérification proportionnée de votre identité pourra vous être demandée.</p>
+      <p>Vous pouvez également introduire une réclamation auprès de l'autorité de contrôle compétente. Au Portugal, il s'agit de la <strong>Comissão Nacional de Proteção de Dados (CNPD)</strong>.</p>
+    </section>
+
+    <section id="s10">
+      <h2><span class="num">10</span> Suppression du compte et des données</h2>
+      <p>Depuis votre profil dans l'application, vous pouvez à tout moment <strong>désactiver votre compte</strong> : vous ne pourrez alors plus vous reconnecter. Cette désactivation est immédiate, mais n'efface pas automatiquement vos données.</p>
+      <p>Pour demander l'<strong>effacement définitif</strong> de votre compte et de vos données personnelles, écrivez-nous à <strong>application.cyclique@gmail.com</strong> en précisant l'adresse e-mail associée à votre compte. Votre demande sera traitée dans un délai raisonnable, et au plus tard dans le délai prévu par le RGPD.</p>
+      <p>La suppression de votre compte n'annule pas automatiquement un abonnement en cours : si vous avez un abonnement actif, pensez à le résilier séparément (ou demandez-le dans le même message) afin qu'aucun nouveau prélèvement n'ait lieu.</p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="num">11</span> Protection des mineures</h2>
+      <p>CYCLIQUE s'adresse à un public adulte, dans le contexte de la grossesse et du post-partum. L'application n'est pas destinée aux enfants et ne cherche pas sciemment à recueillir leurs données. Si vous êtes parent ou tuteur légal et constatez qu'un·e mineur·e a créé un compte, contactez-nous à application.cyclique@gmail.com afin que nous procédions à sa suppression.</p>
+    </section>
+
+    <section id="s12">
+      <h2><span class="num">12</span> Modifications de la présente politique</h2>
+      <p>Cette politique peut être mise à jour pour refléter les évolutions de CYCLIQUE, de ses prestataires ou de la réglementation applicable. La version en vigueur reste accessible depuis cette page et depuis l'application. En cas de modification substantielle, nous vous en informerons par un moyen approprié et recueillerons un nouveau consentement lorsque la réglementation l'exige.</p>
+    </section>
+
+    <section id="s13">
+      <h2><span class="num">13</span> Contact</h2>
+      <address>
+        <strong>CYCLIQUE — Mélissa Ladwein, responsable du traitement</strong>
+        Rua Tacões 63 A, 8970-309 Pereiro ACT, Distrito de Faro, Portugal<br>
+        E-mail : application.cyclique@gmail.com
+      </address>
+    </section>
+  </main>
+</div>
+
+<footer>
+  CYCLIQUE — Politique de confidentialité. Cette page est consultable publiquement et référencée depuis l'application.
+</footer>
