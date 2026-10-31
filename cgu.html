@@ -1,0 +1,261 @@
+<meta charset="UTF-8">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>CGU CYCLIQUE</title>
+<style>
+  :root {
+    --bg: #F6F1E7;
+    --surface: #FFFFFF;
+    --surface-muted: #EFE7D8;
+    --fg: #3B3128;
+    --fg-muted: #7C6E60;
+    --border: #E2D7C3;
+    --accent: #C97B5B;
+    --accent-soft: #C97B5B22;
+    --primary: #6B7A63;
+    --primary-soft: #6B7A6322;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #231E19; --surface: #2C2620; --surface-muted: #332C24;
+      --fg: #EFE7DA; --fg-muted: #B6A991; --border: #463C32;
+      --accent: #E09974; --accent-soft: #E0997433;
+      --primary: #93A489; --primary-soft: #93A48933;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #231E19; --surface: #2C2620; --surface-muted: #332C24;
+    --fg: #EFE7DA; --fg-muted: #B6A991; --border: #463C32;
+    --accent: #E09974; --accent-soft: #E0997433;
+    --primary: #93A489; --primary-soft: #93A48933;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    line-height: 1.65; padding-block: 0;
+  }
+  body, .shell { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  h1, h2, h3, .brand { font-family: 'Fraunces', Georgia, serif; }
+  header.top {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: var(--bg); border-bottom: 1px solid var(--border); padding: 14px 0;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+    z-index: 10; background: var(--bg);
+  }
+  .top-inner {
+    max-width: 920px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .brand { font-size: 1.25rem; font-weight: 600; color: var(--primary); letter-spacing: 0.02em; }
+  .brand span { color: var(--accent); }
+  .updated { font-size: 0.8rem; color: var(--fg-muted); white-space: nowrap; }
+  .shell {
+    max-width: 920px; margin: 0 auto;
+    display: grid; grid-template-columns: 220px 1fr; gap: 40px;
+    padding-top: 32px; padding-bottom: 64px; align-items: start;
+  }
+  @media (max-width: 760px) {
+    .shell { grid-template-columns: 1fr; }
+    nav.toc { position: static; order: 2; }
+    main { order: 1; }
+  }
+  nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 80px); font-size: 0.85rem; }
+  nav.toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  nav.toc a { color: var(--fg-muted); text-decoration: none; display: block; padding: 4px 0 4px 10px; border-left: 2px solid transparent; }
+  nav.toc a:hover { color: var(--primary); border-left-color: var(--primary-soft); }
+  main { min-width: 0; }
+  .intro { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; margin-bottom: 36px; }
+  .intro p { margin: 0 0 10px; color: var(--fg-muted); font-size: 0.95rem; }
+  .intro p:last-child { margin-bottom: 0; }
+  .intro strong { color: var(--fg); }
+  section { margin-bottom: 40px; scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 90px); }
+  h2 {
+    font-size: 1.3rem; font-weight: 600; color: var(--fg);
+    display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  h2 .num { color: var(--accent); font-variant-numeric: tabular-nums; font-size: 1rem; }
+  h3 { font-size: 1.02rem; font-weight: 600; color: var(--primary); margin: 22px 0 8px; }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 14px; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  strong { color: var(--fg); }
+  .callout {
+    background: var(--primary-soft); border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: 0.92rem; color: var(--fg); margin: 14px 0;
+  }
+  .fact {
+    background: var(--accent-soft); border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: 0.92rem; margin: 14px 0;
+  }
+  .fact .label { font-weight: 600; color: var(--accent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.06em; display: block; margin-bottom: 4px; }
+  address { font-style: normal; color: var(--fg-muted); font-size: 0.92rem; line-height: 1.6; }
+  address strong { display: block; color: var(--fg); margin-bottom: 2px; }
+  footer {
+    max-width: 920px; margin: 0 auto; padding: 24px 0 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    color: var(--fg-muted); font-size: 0.82rem; border-top: 1px solid var(--border);
+  }
+  a { color: var(--accent); }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">CYCL<span>I</span>QUE</div>
+    <div class="updated">Dernière mise à jour : 28 octobre 2026</div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="Sommaire">
+    <ol>
+      <li><a href="#s1">1. Objet</a></li>
+      <li><a href="#s2">2. Éditeur</a></li>
+      <li><a href="#s3">3. Accès et compte</a></li>
+      <li><a href="#s4">4. Les services</a></li>
+      <li><a href="#s5">5. Les comptes spécifiques</a></li>
+      <li><a href="#s6">6. Tes obligations</a></li>
+      <li><a href="#s7">7. Avertissement santé</a></li>
+      <li><a href="#s8">8. La Communauté</a></li>
+      <li><a href="#s9">9. Propriété intellectuelle</a></li>
+      <li><a href="#s10">10. Suspension et suppression</a></li>
+      <li><a href="#s11">11. Évolution du service</a></li>
+      <li><a href="#s12">12. Responsabilité</a></li>
+      <li><a href="#s13">13. Données personnelles</a></li>
+      <li><a href="#s14">14. Droit applicable</a></li>
+      <li><a href="#s15">15. Contact</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <p><strong>Conditions Générales d'Utilisation — CYCLIQUE</strong></p>
+      <p>Les présentes CGU définissent les règles d'utilisation de l'application CYCLIQUE. En créant un compte, tu les acceptes dans leur intégralité. Si tu n'es pas d'accord avec l'une de ces conditions, tu ne dois pas créer de compte ni utiliser l'application.</p>
+    </div>
+
+    <section id="s1">
+      <h2><span class="num">1</span> Objet</h2>
+      <p>CYCLIQUE est une application mobile de fitness dédiée à l'adaptation du corps féminin à ses différentes étapes de vie, avec un premier volet consacré à la reconstruction physique et au bien-être pendant le post-partum. Elle propose des programmes d'entraînement, un suivi de progression, un espace communautaire entre utilisatrices et une messagerie avec l'équipe CYCLIQUE et certain·e·s professionnel·le·s de santé ou partenaires référencé·e·s.</p>
+      <p>Les présentes CGU s'appliquent à toute personne créant un compte et utilisant l'application, quel que soit son rôle (utilisatrice, professionnel·le de santé, partenaire). Les conditions financières de l'abonnement payant sont définies séparément dans les <strong>Conditions Générales de Vente (CGV)</strong>, acceptées au moment de la souscription.</p>
+    </section>
+
+    <section id="s2">
+      <h2><span class="num">2</span> Éditeur de l'application</h2>
+      <address>
+        <strong>Mélissa Ladwein</strong>
+        Rua Tacões 63 A, 8970-309 Pereiro ACT, Distrito de Faro, Portugal<br>
+        Contact : application.cyclique@gmail.com
+      </address>
+      <p>Dans les présentes CGU, « CYCLIQUE », « nous » et « l'application » désignent l'éditeur ci-dessus. « Tu »/« l'utilisatrice » désigne toute personne ayant créé un compte, quel que soit son rôle.</p>
+    </section>
+
+    <section id="s3">
+      <h2><span class="num">3</span> Accès au service et création de compte</h2>
+      <p>L'accès à CYCLIQUE nécessite la création d'un compte, par e-mail et mot de passe ou via « Se connecter avec Google ». Tu t'engages à fournir des informations exactes et à les tenir à jour, et à garder confidentiels tes identifiants de connexion. Toute activité effectuée depuis ton compte est présumée provenir de toi.</p>
+      <p>Un compte est strictement personnel et ne peut être partagé, cédé ou transféré à un tiers.</p>
+      <p>Certaines fonctionnalités (programmes d'entraînement complets, Communauté, Messagerie) ne sont accessibles qu'après souscription d'un abonnement payant — voir les CGV. L'Accueil et le catalogue des programmes restent consultables sans abonnement.</p>
+    </section>
+
+    <section id="s4">
+      <h2><span class="num">4</span> Description des services</h2>
+      <h3>Programmes d'entraînement</h3>
+      <p>CYCLIQUE propose des programmes d'entraînement organisés en cycles, mois et séances, avec un suivi de ta progression (séances terminées, séries, répétitions, poids que tu renseignes). Certains programmes sont gratuits ; l'accès à l'ensemble du catalogue payant dépend d'un abonnement actif (voir CGV) ou, pour certains contenus vendus à l'unité (guides, ebooks), d'un achat distinct.</p>
+      <h3>Communauté</h3>
+      <p>Un espace où les utilisatrices peuvent publier, commenter et réagir à du contenu lié à leur parcours, et retrouver d'autres membres selon des points communs qu'elles choisissent elles-mêmes de rendre visibles (voir la Politique de confidentialité). L'accès à la Communauté nécessite un abonnement actif.</p>
+      <h3>Messagerie</h3>
+      <p>Un canal d'échange avec l'équipe CYCLIQUE et, selon les programmes, avec des professionnel·le·s de santé ou partenaires référencé·e·s dans l'application. L'accès à la Messagerie nécessite un abonnement actif.</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="num">5</span> Les comptes spécifiques : professionnel·le de santé et partenaire</h2>
+      <p>Certains comptes sont désignés par l'administration de CYCLIQUE comme « Professionnel·le de santé » ou « Partenaire ». Ces rôles donnent accès à des fonctionnalités distinctes (évaluation de programmes avant publication pour les professionnel·le·s de santé, création de contenu pour les partenaires) et sont soumis à des règles d'usage propres à leur mission, communiquées séparément par l'administration. Ces comptes n'ont pas accès à l'espace Communauté.</p>
+    </section>
+
+    <section id="s6">
+      <h2><span class="num">6</span> Tes obligations</h2>
+      <p>En utilisant CYCLIQUE, tu t'engages à :</p>
+      <ul>
+        <li>respecter les autres utilisatrices, notamment dans la Communauté et la Messagerie (bienveillance, absence de propos injurieux, discriminatoires, harcelants ou dégradants) ;</li>
+        <li>ne publier aucun contenu illicite, portant atteinte aux droits d'un tiers, à caractère commercial non autorisé (spam, publicité) ou présentant un danger pour la santé d'autrui (conseils médicaux non fondés, par exemple) ;</li>
+        <li>ne pas utiliser l'application à des fins frauduleuses ou pour contourner les mesures de sécurité ou le modèle économique de CYCLIQUE ;</li>
+        <li>ne pas tenter d'accéder aux comptes d'autres utilisatrices ni aux parties non publiques de l'application.</li>
+      </ul>
+      <p>Tout manquement à ces règles peut entraîner la suppression du contenu concerné, un signalement examiné par l'équipe CYCLIQUE, ou la suspension/désactivation du compte (voir section 10).</p>
+    </section>
+
+    <section id="s7">
+      <h2><span class="num">7</span> Avertissement relatif à la santé</h2>
+      <div class="callout">
+        <strong>CYCLIQUE n'est pas un dispositif médical et ne fournit aucun avis médical personnalisé.</strong> Les programmes proposés sont des programmes d'entraînement physique généraux, qui ne remplacent en aucun cas le suivi d'un·e professionnel·le de santé.
+      </div>
+      <p>Avant de commencer un programme, en particulier en période post-partum, nous te recommandons fortement de consulter ton médecin, ta sage-femme ou tout·e professionnel·le de santé compétent·e pour t'assurer que les exercices proposés sont adaptés à ta situation personnelle.</p>
+      <p>Chaque programme publié sur CYCLIQUE est soumis, avant publication, à la validation de professionnel·le·s de santé assigné·e·s, qui en vérifient le contenu général. Cette validation porte sur le programme dans son ensemble et ne constitue en aucun cas un suivi médical individualisé de ta situation — elle n'a pas pour objet, ni pour effet, de se substituer à l'avis d'un·e professionnel·le de santé qui te connaît et t'examine.</p>
+      <p>Tu pratiques les exercices proposés sous ta seule responsabilité. Arrête immédiatement un exercice en cas de douleur, de gêne inhabituelle ou de doute, et consulte un·e professionnel·le de santé.</p>
+    </section>
+
+    <section id="s8">
+      <h2><span class="num">8</span> La Communauté : contenu et modération</h2>
+      <p>Tu restes seule responsable du contenu que tu publies (texte, photos, messages vocaux). CYCLIQUE se réserve le droit de supprimer tout contenu contraire aux présentes CGU, sans préavis, et de modérer les comptes concernés.</p>
+      <p>Tu peux signaler un contenu ou un compte dont le comportement te semble poser problème ; l'équipe CYCLIQUE examine chaque signalement et décide des suites à y donner (suppression de contenu, avertissement, blocage ou suppression de compte).</p>
+      <p>CYCLIQUE n'est pas éditeur des contenus publiés par les utilisatrices et n'exerce qu'un contrôle a posteriori (modération sur signalement ou à son initiative), sans obligation générale de surveillance préalable de chaque publication.</p>
+    </section>
+
+    <section id="s9">
+      <h2><span class="num">9</span> Propriété intellectuelle</h2>
+      <p>L'application CYCLIQUE, sa marque, son identité visuelle, ses programmes d'entraînement, vidéos, textes et autres contenus édités par CYCLIQUE (hors contenu publié par les utilisatrices elles-mêmes) sont protégés par le droit de la propriété intellectuelle et restent la propriété de CYCLIQUE ou de ses partenaires/ayants droit. Toute reproduction, diffusion ou exploitation non autorisée est interdite.</p>
+      <p>En publiant un contenu dans la Communauté, tu conserves tes droits sur ce contenu, mais tu accordes à CYCLIQUE le droit de l'afficher dans l'application, dans le cadre normal de son fonctionnement (affichage aux autres membres, modération).</p>
+    </section>
+
+    <section id="s10">
+      <h2><span class="num">10</span> Suspension, désactivation et suppression de compte</h2>
+      <p>Tu peux désactiver ton compte à tout moment depuis ton profil : tu ne pourras alors plus te reconnecter, mais tes données ne sont pas effacées automatiquement. Pour demander la suppression définitive de ton compte et de tes données, voir la Politique de confidentialité (section « Suppression du compte et des données »).</p>
+      <p>CYCLIQUE peut suspendre ou désactiver un compte, à tout moment et sans préavis, en cas de manquement grave ou répété aux présentes CGU, notamment en cas de comportement mettant en danger d'autres utilisatrices ou le bon fonctionnement du service.</p>
+      <p>La désactivation ou suppression d'un compte n'annule pas automatiquement un abonnement payant en cours — voir les CGV pour les modalités de résiliation.</p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="num">11</span> Disponibilité et évolution du service</h2>
+      <p>CYCLIQUE s'efforce d'assurer un accès continu à l'application, sans garantir une disponibilité ininterrompue (maintenance, mise à jour, incident technique indépendant de notre volonté). CYCLIQUE peut faire évoluer, ajouter ou retirer des fonctionnalités à tout moment, sans que cela ouvre droit à une quelconque indemnisation, sous réserve, pour une utilisatrice abonnée, de conserver l'accès aux services essentiels couverts par son abonnement en cours.</p>
+    </section>
+
+    <section id="s12">
+      <h2><span class="num">12</span> Responsabilité</h2>
+      <p>CYCLIQUE met en œuvre des moyens raisonnables pour assurer la qualité et la sécurité du service, sans garantir l'absence totale d'erreur, de bug ou d'interruption. CYCLIQUE ne saurait être tenue responsable des dommages résultant d'une mauvaise utilisation de l'application, du non-respect des recommandations de la section 7 (avertissement santé), ou d'un cas de force majeure.</p>
+      <p>Rien dans les présentes CGU n'a pour effet d'exclure ou de limiter une responsabilité qui ne peut légalement l'être (notamment en cas de faute lourde, de dol, ou de dommage corporel directement imputable à CYCLIQUE).</p>
+    </section>
+
+    <section id="s13">
+      <h2><span class="num">13</span> Données personnelles</h2>
+      <p>Le traitement de tes données personnelles est décrit dans la <a href="https://devcyclique.github.io/cyclique-privacy/" target="_blank" rel="noopener">Politique de confidentialité</a>, qui fait partie intégrante des présentes CGU.</p>
+    </section>
+
+    <section id="s14">
+      <h2><span class="num">14</span> Droit applicable et litiges</h2>
+      <p>Les présentes CGU sont soumises au droit applicable à la protection des consommatrices/consommateurs résidant dans l'Union européenne, et notamment, pour les utilisatrices résidant en France, aux dispositions protectrices du droit français de la consommation qui leur sont impérativement applicables.</p>
+      <p>En cas de litige, tu es invitée à nous contacter en priorité à l'adresse indiquée en section 15 afin de rechercher une solution amiable. À défaut d'accord amiable, les tribunaux compétents seront ceux déterminés par les règles de droit applicables, sans préjudice de ton droit, en tant que consommatrice, de saisir la juridiction de ton lieu de résidence.</p>
+    </section>
+
+    <section id="s15">
+      <h2><span class="num">15</span> Contact</h2>
+      <address>
+        <strong>CYCLIQUE — Mélissa Ladwein</strong>
+        Rua Tacões 63 A, 8970-309 Pereiro ACT, Distrito de Faro, Portugal<br>
+        E-mail : application.cyclique@gmail.com
+      </address>
+    </section>
+  </main>
+</div>
+
+<footer>
+  CYCLIQUE — Conditions Générales d'Utilisation. Voir aussi la <a href="https://devcyclique.github.io/cyclique-privacy/">Politique de confidentialité</a> et les <a href="https://devcyclique.github.io/cyclique-privacy/cgv.html">Conditions Générales de Vente</a>.
+</footer>

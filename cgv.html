@@ -1,0 +1,231 @@
+<meta charset="UTF-8">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>CGV CYCLIQUE</title>
+<style>
+  :root {
+    --bg: #F6F1E7;
+    --surface: #FFFFFF;
+    --surface-muted: #EFE7D8;
+    --fg: #3B3128;
+    --fg-muted: #7C6E60;
+    --border: #E2D7C3;
+    --accent: #C97B5B;
+    --accent-soft: #C97B5B22;
+    --primary: #6B7A63;
+    --primary-soft: #6B7A6322;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #231E19; --surface: #2C2620; --surface-muted: #332C24;
+      --fg: #EFE7DA; --fg-muted: #B6A991; --border: #463C32;
+      --accent: #E09974; --accent-soft: #E0997433;
+      --primary: #93A489; --primary-soft: #93A48933;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #231E19; --surface: #2C2620; --surface-muted: #332C24;
+    --fg: #EFE7DA; --fg-muted: #B6A991; --border: #463C32;
+    --accent: #E09974; --accent-soft: #E0997433;
+    --primary: #93A489; --primary-soft: #93A48933;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    line-height: 1.65; padding-block: 0;
+  }
+  body, .shell { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  h1, h2, h3, .brand { font-family: 'Fraunces', Georgia, serif; }
+  header.top {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: var(--bg); border-bottom: 1px solid var(--border); padding: 14px 0;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+    z-index: 10; background: var(--bg);
+  }
+  .top-inner {
+    max-width: 920px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .brand { font-size: 1.25rem; font-weight: 600; color: var(--primary); letter-spacing: 0.02em; }
+  .brand span { color: var(--accent); }
+  .updated { font-size: 0.8rem; color: var(--fg-muted); white-space: nowrap; }
+  .shell {
+    max-width: 920px; margin: 0 auto;
+    display: grid; grid-template-columns: 220px 1fr; gap: 40px;
+    padding-top: 32px; padding-bottom: 64px; align-items: start;
+  }
+  @media (max-width: 760px) {
+    .shell { grid-template-columns: 1fr; }
+    nav.toc { position: static; order: 2; }
+    main { order: 1; }
+  }
+  nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 80px); font-size: 0.85rem; }
+  nav.toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  nav.toc a { color: var(--fg-muted); text-decoration: none; display: block; padding: 4px 0 4px 10px; border-left: 2px solid transparent; }
+  nav.toc a:hover { color: var(--primary); border-left-color: var(--primary-soft); }
+  main { min-width: 0; }
+  .intro { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; margin-bottom: 36px; }
+  .intro p { margin: 0 0 10px; color: var(--fg-muted); font-size: 0.95rem; }
+  .intro p:last-child { margin-bottom: 0; }
+  .intro strong { color: var(--fg); }
+  section { margin-bottom: 40px; scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 90px); }
+  h2 {
+    font-size: 1.3rem; font-weight: 600; color: var(--fg);
+    display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  h2 .num { color: var(--accent); font-variant-numeric: tabular-nums; font-size: 1rem; }
+  h3 { font-size: 1.02rem; font-weight: 600; color: var(--primary); margin: 22px 0 8px; }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 14px; padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  strong { color: var(--fg); }
+  .callout {
+    background: var(--primary-soft); border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: 0.92rem; color: var(--fg); margin: 14px 0;
+  }
+  .fact {
+    background: var(--accent-soft); border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: 0.92rem; margin: 14px 0;
+  }
+  .fact .label { font-weight: 600; color: var(--accent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.06em; display: block; margin-bottom: 4px; }
+  address { font-style: normal; color: var(--fg-muted); font-size: 0.92rem; line-height: 1.6; }
+  address strong { display: block; color: var(--fg); margin-bottom: 2px; }
+  footer {
+    max-width: 920px; margin: 0 auto; padding: 24px 0 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    color: var(--fg-muted); font-size: 0.82rem; border-top: 1px solid var(--border);
+  }
+  a { color: var(--accent); }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">CYCL<span>I</span>QUE</div>
+    <div class="updated">Dernière mise à jour : 28 octobre 2026</div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="Sommaire">
+    <ol>
+      <li><a href="#s1">1. Objet</a></li>
+      <li><a href="#s2">2. Le vendeur</a></li>
+      <li><a href="#s3">3. L'abonnement</a></li>
+      <li><a href="#s4">4. Prix et paiement</a></li>
+      <li><a href="#s5">5. Durée et fin d'accès</a></li>
+      <li><a href="#s6">6. Rétractation</a></li>
+      <li><a href="#s7">7. Résiliation</a></li>
+      <li><a href="#s8">8. Remboursement</a></li>
+      <li><a href="#s9">9. Réclamations</a></li>
+      <li><a href="#s10">10. Droit applicable</a></li>
+      <li><a href="#s11">11. Contact</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <p><strong>Conditions Générales de Vente — CYCLIQUE</strong></p>
+      <p>Les présentes CGV s'appliquent à toute souscription à l'abonnement payant de l'application CYCLIQUE. Elles complètent les <a href="https://devcyclique.github.io/cyclique-privacy/cgu.html" target="_blank" rel="noopener">Conditions Générales d'Utilisation</a>, qui restent applicables par ailleurs. En confirmant ton paiement, tu acceptes les présentes CGV.</p>
+    </div>
+
+    <section id="s1">
+      <h2><span class="num">1</span> Objet</h2>
+      <p>Les présentes Conditions Générales de Vente définissent les modalités de vente de l'abonnement à l'application CYCLIQUE entre l'éditeur de l'application (« nous », « CYCLIQUE ») et toute personne physique agissant en tant que consommatrice (« tu », l'« acheteuse »).</p>
+    </section>
+
+    <section id="s2">
+      <h2><span class="num">2</span> Identification du vendeur</h2>
+      <address>
+        <strong>Mélissa Ladwein</strong>
+        Rua Tacões 63 A, 8970-309 Pereiro ACT, Distrito de Faro, Portugal<br>
+        E-mail : application.cyclique@gmail.com
+      </address>
+      <div class="fact">
+        <span class="label">À compléter</span>
+        Numéro d'immatriculation/activité, numéro de TVA intracommunautaire le cas échéant, et modalités de médiation de la consommation — à ajouter ici une fois le statut d'activité de l'éditeur finalisé. Ces mentions sont obligatoires avant la mise en ligne définitive de ces CGV.
+      </div>
+    </section>
+
+    <section id="s3">
+      <h2><span class="num">3</span> L'abonnement proposé</h2>
+      <p>CYCLIQUE propose un abonnement global donnant accès, pendant toute sa durée, à l'ensemble des programmes d'entraînement payants du catalogue, ainsi qu'à la Communauté et à la Messagerie. Deux formules sont proposées au choix, affichées dans l'application au moment de la souscription :</p>
+      <ul>
+        <li><strong>Paiement en une fois</strong> : un paiement unique donne accès pour une durée déterminée, affichée avant le paiement.</li>
+        <li><strong>Abonnement mensuel</strong> : un prélèvement mensuel récurrent, pour une durée totale déterminée et affichée avant le paiement — passé ce nombre de mois, les prélèvements s'arrêtent automatiquement, sans reconduction tacite au-delà de cette durée.</li>
+      </ul>
+      <p>Le prix et la durée exacts applicables sont ceux affichés dans l'application au moment où tu confirmes ton choix — ils peuvent évoluer dans le temps et ne sont donc pas repris en valeur fixe dans les présentes CGV.</p>
+      <p>Certains contenus (guides, ebooks) peuvent être proposés à la vente à l'unité, en dehors de l'abonnement global ; ils donnent alors accès uniquement au contenu acheté, selon les mêmes principes de prix affiché au moment de l'achat.</p>
+    </section>
+
+    <section id="s4">
+      <h2><span class="num">4</span> Prix et modalités de paiement</h2>
+      <p>Les prix sont indiqués en euros, toutes taxes comprises le cas échéant. Le paiement est traité par <strong>Stripe</strong>, prestataire de paiement tiers : tu renseignes tes coordonnées bancaires directement sur la page de paiement sécurisée de Stripe, jamais dans l'application CYCLIQUE elle-même, qui ne reçoit et ne conserve jamais ton numéro de carte complet.</p>
+      <p>Pour l'abonnement mensuel, le prélèvement a lieu automatiquement chaque mois, pour le nombre de mois affiché au moment de la souscription, sauf résiliation anticipée de ta part (voir section 7).</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="num">5</span> Durée et fin d'accès</h2>
+      <p>L'accès débute immédiatement après confirmation du paiement et dure pour la période indiquée au moment de l'achat. À l'issue de cette période (paiement unique) ou du nombre de prélèvements prévu (abonnement mensuel), l'accès aux programmes payants, à la Communauté et à la Messagerie cesse automatiquement, sauf nouvelle souscription de ta part.</p>
+    </section>
+
+    <section id="s6">
+      <h2><span class="num">6</span> Droit de rétractation</h2>
+      <p>Conformément à l'article L.221-18 du Code de la consommation, tu disposes en principe d'un délai de 14 jours pour te rétracter d'un achat en ligne, sans avoir à te justifier.</p>
+      <div class="callout">
+        <strong>Exception applicable ici :</strong> l'abonnement CYCLIQUE donne accès à un contenu numérique non fourni sur un support matériel, avec exécution immédiate dès le paiement confirmé. Conformément à l'article L.221-28 13° du Code de la consommation, le droit de rétractation ne peut alors être exercé qu'à la condition que tu n'aies pas expressément demandé l'exécution immédiate du service et renoncé à ton droit de rétractation.
+      </div>
+      <p>Au moment de la souscription, l'application te demande explicitement cette confirmation (case à cocher distincte de l'acceptation des CGV) : en cochant cette case, tu demandes expressément à bénéficier immédiatement de l'abonnement et tu renonces à ton droit de rétractation de 14 jours à compter du moment où l'accès t'est effectivement donné.</p>
+      <p>Si tu ne souhaites pas renoncer à ce droit, ne confirme pas cette case : l'achat ne sera pas finalisé.</p>
+    </section>
+
+    <section id="s7">
+      <h2><span class="num">7</span> Résiliation</h2>
+      <p>Tu peux résilier le renouvellement de ton abonnement mensuel à tout moment depuis l'application ou en nous contactant. La résiliation met fin aux prélèvements futurs ; elle ne donne pas lieu à un remboursement de la période déjà payée, et ton accès reste actif jusqu'à la fin de cette période déjà réglée.</p>
+      <p>CYCLIQUE peut mettre fin à ton abonnement en cas de manquement grave aux Conditions Générales d'Utilisation (voir CGU, section 10), y compris de façon immédiate dans les cas les plus graves, sans que cela ouvre droit à un remboursement de la période déjà consommée au moment de la résiliation.</p>
+    </section>
+
+    <section id="s8">
+      <h2><span class="num">8</span> Remboursement</h2>
+      <p>En dehors de l'exercice valable d'un droit de rétractation (voir section 6, qui ne s'applique en pratique qu'en l'absence de la renonciation express que l'application te demande) ou d'un dysfonctionnement avéré et imputable à CYCLIQUE t'ayant empêchée d'accéder au service payé, aucun remboursement n'est dû au titre d'un simple changement d'avis après le début de l'accès au service.</p>
+      <p>Pour toute demande de remboursement, contacte-nous à l'adresse indiquée en section 11, en précisant la nature du problème rencontré.</p>
+    </section>
+
+    <section id="s9">
+      <h2><span class="num">9</span> Réclamations et médiation</h2>
+      <p>Pour toute réclamation relative à un achat, contacte-nous en priorité à l'adresse indiquée en section 11. À défaut de résolution amiable, et si tu es une consommatrice résidant dans l'Union européenne, tu peux recourir à la plateforme européenne de règlement en ligne des litiges : <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>.</p>
+      <div class="fact">
+        <span class="label">À compléter</span>
+        Coordonnées d'un médiateur de la consommation désigné, si cette désignation s'avère obligatoire au regard du statut final de l'éditeur — à vérifier avec un conseil juridique avant publication définitive.
+      </div>
+    </section>
+
+    <section id="s10">
+      <h2><span class="num">10</span> Droit applicable</h2>
+      <p>Les présentes CGV sont soumises aux dispositions impératives de protection des consommatrices/consommateurs applicables dans leur pays de résidence au sein de l'Union européenne, notamment, pour les acheteuses résidant en France, aux dispositions du Code de la consommation français relatives à la vente à distance et au droit de rétractation, qui leur restent acquises quelles que soient les présentes CGV.</p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="num">11</span> Contact</h2>
+      <address>
+        <strong>CYCLIQUE — Mélissa Ladwein</strong>
+        Rua Tacões 63 A, 8970-309 Pereiro ACT, Distrito de Faro, Portugal<br>
+        E-mail : application.cyclique@gmail.com
+      </address>
+    </section>
+  </main>
+</div>
+
+<footer>
+  CYCLIQUE — Conditions Générales de Vente. Voir aussi les <a href="https://devcyclique.github.io/cyclique-privacy/cgu.html">Conditions Générales d'Utilisation</a> et la <a href="https://devcyclique.github.io/cyclique-privacy/">Politique de confidentialité</a>.
+</footer>
